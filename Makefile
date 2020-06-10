@@ -17,7 +17,7 @@ else
 endif
 
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
-CFLAGS := -g -Wall
+CFLAGS := -g -Wall -fsanitize=address
 #LIB := 
 INC := -I include
 LINKLIB:= 
@@ -33,7 +33,7 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT) clean
 	@echo "compiling the source files"
 	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
 
-run:
+run: $(TARGET)
 	./$(TARGET)
 
 clean:
